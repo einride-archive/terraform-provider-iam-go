@@ -1,6 +1,6 @@
 module github.com/einride/terraform-provider-iam-go
 
-go 1.17
+go 1.19
 
 require (
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.23.0
