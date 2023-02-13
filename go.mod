@@ -5,12 +5,13 @@ go 1.17
 require (
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.23.0
 	go.einride.tech/iam v0.43.0
-	google.golang.org/genproto v0.0.0-20220715211116-798f69b842b9
-	google.golang.org/grpc v1.49.0
+	google.golang.org/genproto v0.0.0-20230110181048-76db0878b65f
+	google.golang.org/grpc v1.53.0
 	google.golang.org/protobuf v1.28.1
 )
 
 require (
+	cloud.google.com/go/iam v0.8.0 // indirect
 	github.com/agext/levenshtein v1.2.3 // indirect
 	github.com/apparentlymart/go-textseg/v13 v13.0.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
@@ -51,8 +52,8 @@ require (
 	github.com/zclconf/go-cty v1.11.0 // indirect
 	go.einride.tech/aip v0.54.1 // indirect
 	golang.org/x/crypto v0.0.0-20220517005047-85d78b3ac167 // indirect
-	golang.org/x/net v0.0.0-20220624214902-1bab6f366d9e // indirect
-	golang.org/x/sys v0.0.0-20220624220833-87e55d714810 // indirect
-	golang.org/x/text v0.3.7 // indirect
+	golang.org/x/net v0.5.0 // indirect
+	golang.org/x/sys v0.4.0 // indirect
+	golang.org/x/text v0.6.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 )
