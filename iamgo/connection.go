@@ -55,7 +55,7 @@ func unaryClientInterceptor(
 
 type tokenCredentials string
 
-func (t tokenCredentials) GetRequestMetadata(ctx context.Context, uri ...string) (map[string]string, error) {
+func (t tokenCredentials) GetRequestMetadata(context.Context, ...string) (map[string]string, error) {
 	return map[string]string{
 		"authorization": "Bearer " + string(t),
 	}, nil

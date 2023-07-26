@@ -6,11 +6,11 @@ import (
 	"regexp"
 	"strings"
 
+	"cloud.google.com/go/iam/apiv1/iampb"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"go.einride.tech/iam/iampolicy"
-	"google.golang.org/genproto/googleapis/iam/v1"
 )
 
 func resourceMember() *schema.Resource {
@@ -161,31 +161,31 @@ func getResourceIAMMember(data *schema.ResourceData) *iamMember {
 
 func setIamPolicy(
 	ctx context.Context,
-	client iam.IAMPolicyClient,
+	client iampb.IAMPolicyClient,
 	resource string,
-	policy *iam.Policy,
-) (*iam.Policy, error) {
+	policy *iampb.Policy,
+) (*iampb.Policy, error) {
 	return client.SetIamPolicy(
 		ctx,
-		&iam.SetIamPolicyRequest{
+		&iampb.SetIamPolicyRequest{
 			Resource: resource,
 			Policy:   policy,
 		},
 	)
 }
 
-func getIamPolicy(ctx context.Context, client iam.IAMPolicyClient, resource string) (*iam.Policy, error) {
+func getIamPolicy(ctx context.Context, client iampb.IAMPolicyClient, resource string) (*iampb.Policy, error) {
 	return client.GetIamPolicy(
 		ctx,
-		&iam.GetIamPolicyRequest{
+		&iampb.GetIamPolicyRequest{
 			Resource: resource,
 			Options:  nil,
 		},
 	)
 }
 
-func contains(iamMember *iamMember, policy *iam.Policy) bool {
-	var binding *iam.Binding
+func contains(iamMember *iamMember, policy *iampb.Policy) bool {
+	var binding *iampb.Binding
 	for _, b := range policy.Bindings {
 		if b.Role == iamMember.role {
 			binding = b

@@ -3,7 +3,7 @@ package iamgo
 import (
 	"sync"
 
-	"google.golang.org/genproto/googleapis/iam/v1"
+	"cloud.google.com/go/iam/apiv1/iampb"
 )
 
 type resourceName string
@@ -11,10 +11,10 @@ type resourceName string
 type policyUpdate struct {
 	mutex     *sync.Mutex
 	resources map[resourceName]*sync.Mutex
-	client    iam.IAMPolicyClient
+	client    iampb.IAMPolicyClient
 }
 
-func newPolicyUpdate(client iam.IAMPolicyClient) *policyUpdate {
+func newPolicyUpdate(client iampb.IAMPolicyClient) *policyUpdate {
 	return &policyUpdate{
 		mutex:     &sync.Mutex{},
 		resources: make(map[resourceName]*sync.Mutex),
