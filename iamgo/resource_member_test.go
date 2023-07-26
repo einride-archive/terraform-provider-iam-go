@@ -6,10 +6,10 @@ import (
 	"strings"
 	"testing"
 
+	"cloud.google.com/go/iam/apiv1/iampb"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
-	"google.golang.org/genproto/googleapis/iam/v1"
 )
 
 func TestIAMGoMemberResource(t *testing.T) {
@@ -77,7 +77,7 @@ func verifyResourceDestroy(provider *schema.Provider) resource.TestCheckFunc {
 				role:     id[1],
 				member:   id[2],
 			}
-			req := &iam.GetIamPolicyRequest{Resource: mem.resource, Options: nil}
+			req := &iampb.GetIamPolicyRequest{Resource: mem.resource, Options: nil}
 			bb, _ := client.GetIamPolicy(context.Background(), req)
 			if contains(&mem, bb) {
 				return fmt.Errorf("resource (%s) still exists in remote api", rs.Primary.ID)

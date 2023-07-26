@@ -67,6 +67,9 @@ func TfDocPlugin(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
+	if err := os.MkdirAll(sg.FromGitRoot("docs"), 0o700); err != nil {
+		return err
+	}
 	return sg.Command(ctx, gen).Run()
 }
 

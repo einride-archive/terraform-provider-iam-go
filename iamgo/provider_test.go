@@ -4,9 +4,9 @@ import (
 	"context"
 	"testing"
 
+	"cloud.google.com/go/iam/apiv1/iampb"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"google.golang.org/genproto/googleapis/iam/v1"
 	"google.golang.org/grpc"
 )
 
@@ -39,40 +39,40 @@ func TestProvider(t *testing.T) {
 
 func newMockClient() *mockIamService {
 	return &mockIamService{
-		make(map[string]*iam.Policy),
+		make(map[string]*iampb.Policy),
 	}
 }
 
-var _ iam.IAMPolicyClient = &mockIamService{}
+var _ iampb.IAMPolicyClient = &mockIamService{}
 
 type mockIamService struct {
-	policies map[string]*iam.Policy
+	policies map[string]*iampb.Policy
 }
 
 func (m mockIamService) SetIamPolicy(
-	ctx context.Context,
-	req *iam.SetIamPolicyRequest,
-	opts ...grpc.CallOption,
-) (*iam.Policy, error) {
+	_ context.Context,
+	req *iampb.SetIamPolicyRequest,
+	_ ...grpc.CallOption,
+) (*iampb.Policy, error) {
 	m.policies[req.GetResource()] = req.Policy
 	return req.Policy, nil
 }
 
 func (m mockIamService) GetIamPolicy(
-	ctx context.Context,
-	req *iam.GetIamPolicyRequest,
-	opts ...grpc.CallOption,
-) (*iam.Policy, error) {
+	_ context.Context,
+	req *iampb.GetIamPolicyRequest,
+	_ ...grpc.CallOption,
+) (*iampb.Policy, error) {
 	if val, ok := m.policies[req.GetResource()]; ok {
 		return val, nil
 	}
-	return &iam.Policy{}, nil
+	return &iampb.Policy{}, nil
 }
 
 func (m mockIamService) TestIamPermissions(
-	ctx context.Context,
-	req *iam.TestIamPermissionsRequest,
-	opts ...grpc.CallOption,
-) (*iam.TestIamPermissionsResponse, error) {
+	_ context.Context,
+	_ *iampb.TestIamPermissionsRequest,
+	_ ...grpc.CallOption,
+) (*iampb.TestIamPermissionsResponse, error) {
 	panic("implement me")
 }

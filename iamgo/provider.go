@@ -3,9 +3,9 @@ package iamgo
 import (
 	"context"
 
+	"cloud.google.com/go/iam/apiv1/iampb"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"google.golang.org/genproto/googleapis/iam/v1"
 	"google.golang.org/grpc"
 )
 
@@ -50,5 +50,5 @@ func providerConfigure(ctx context.Context, d *schema.ResourceData) (interface{}
 		return nil, diag.FromErr(err)
 	}
 
-	return newPolicyUpdate(iam.NewIAMPolicyClient(client)), diags
+	return newPolicyUpdate(iampb.NewIAMPolicyClient(client)), diags
 }
