@@ -6,7 +6,7 @@ require (
 	cloud.google.com/go/iam v1.1.1
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.29.0
 	go.einride.tech/iam v0.49.0
-	google.golang.org/grpc v1.57.0
+	google.golang.org/grpc v1.57.1
 	google.golang.org/protobuf v1.31.0
 )
 
