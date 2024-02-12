@@ -4,11 +4,7 @@ metadata:
   name: terraform-provider-iam-go
   description: |
     A terraform provider for https://github.com/einride/iam-go
-  annotations:
-    github.com/project-slug: einride/terraform-provider-iam-go
-    github.com/team-slug: einride/team-cloud-control
-    backstage.io/source-location: url:https://github.com/einride/terraform-provider-iam-go/tree/master/
 spec:
   type: library
   lifecycle: production
-  owner: team-cloud-control
+  owner: platform-engineering
